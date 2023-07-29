@@ -1,0 +1,249 @@
+{% extends 'es/layout.html' %}
+{% load crispy_forms_tags %}	
+{% load static %}
+{% block content %}
+<!-- DESKTOP -->
+
+<div class="desktop">
+<div class="subpages-title">
+    <h1 class="title-center light tshadow title-size-2">SERVICIOS Y ACTIVIDADES</h1>
+</div>
+<div class="padding"></div>
+<div class="flex center2">
+    <div>
+                <!-- Button trigger modal -->
+        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="hover-box">
+                  <img src="{% static 'images/cabin-02.JPG' %}" class="d-block w300 image-hover shadow round-corner">
+                  <div class="content-on-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                      </svg>
+                  </div>
+            </div>
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Fotos Cabaña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{% static 'images/cabin-02.JPG' %}" class="d-block w100p" alt="img1">
+                          </div>
+                          {%for cabanas_foto in cabanas_fotos %}
+                          <div class="carousel-item">
+                            <img src="{{cabanas_foto.img.url}}" class="d-block w100p" alt="">
+                          </div>
+                          {%endfor%}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                      
+                </div>
+            </div>
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="m15">
+        {%for cabana in cabanas%}
+        <h1 class="blue">{{cabana.name}}</h1>
+        <h4 class="dark">{{cabana.description}}</h4>
+        <div class="center flex">
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/bed.png' %}" class="w100p center icon-op">
+            </div>
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/bathroom.png' %}" class="w100p center icon-op">
+            </div>
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/stove.png' %}" class="w100p center icon-op">
+            </div>
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/refrigerator.png' %}" class="w100p center icon-op">
+            </div>
+            <div class=" m20 w50">
+                <img src="{% static 'images/icons/bbq.png' %}" class="w100p center icon-op">
+            </div>
+            <div class=" m20 w50">
+                <img src="{% static 'images/icons/microwave-oven.png' %}" class="w100p center icon-op">
+            </div>
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/fan.png' %}" class="w100p center icon-op">
+            </div>
+            <div class="m20 w50">
+                <img src="{% static 'images/icons/swimming-pool.png' %}" class="w100p center icon-op">
+            </div>
+        </div>
+        <div class="divisor"></div>
+        <div class="aright">
+                <h5 class="orange"><span>AR${{cabana.price}}</span>{{cabana.term}} </h5>
+            <h6 class="dark">hasta {{cabana.top_persons_1st_price}} personas, por persona adicional AR${{cabana.price_extra_persons}} {{cabana.term}}.</h6>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+<br>
+
+<div class="container">
+    <h1 class="title-center blue">SERVICIOS</h1>
+    <div class="title-divisor"></div>
+</div>
+
+<div class="center2">
+    {%for service in services %} 
+    <div class="flex m20 p10 bbottom-blue">
+        <img class="icon-op w80" src="{{service.img.url}}">
+        <div class="w100p m10">
+            <div class="flex jspacebetween"><h4 class="dark">{{service.name}}</h4><h4 class="dark">AR${{service.price}}</h4></div>
+            <div class="flex jspacebetween"><p>{{service.description}}</p></div>
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+
+    
+    <div class="container">
+        <h1 class="title-center orange">ACTIVIDADES</h1>
+        <h5 class="title-center">Deportes no incluyen uso del quincho y piscinas, si el acceso a baños y duchas.</h5>
+        <div class="title-divisor"></div>
+    </div>
+    {%for sport in sports %} 
+    <div class="flex m20 p10 bbottom-blue">
+        <img class="icon-op w80" src="{{sport.img.url}}">
+        <div class="w100p m10">
+        <div class="flex jspacebetween lmargin"><h4 class="dark">{{sport.name}}</h4><h4 class="dark">AR${{sport.price}} p/hora</h4></div>
+    </div>
+    </div>
+    {% endfor %}
+    
+</div>
+<br>
+</div>
+
+<!-- MOBILE -->
+<div class="mobile">
+    <div class="center">
+        <div id="carouselExampleControls" class="carousel slide shadow " data-bs-ride="carousel">
+            <div class="carousel-inner round-corner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/cabin-02.JPG' %}" class="d-block w100p" alt="img1">
+              </div>
+              {%for cabanas_foto in cabanas_fotos %}
+              <div class="carousel-item">
+                <img src="{{cabanas_foto.img.url}}" class="d-block w100p" alt="">
+              </div>
+              {%endfor%}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        <div class="m15">
+            {%for cabana in cabanas%}
+            <h1 class="blue">{{cabana.name}}</h1>
+            <h4 class="dark">{{cabana.description}}</h4>
+            <div class="flex jcenter">
+                <div class="center">
+                    <div class="flex">
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/bed.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/bathroom.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/stove.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/refrigerator.png' %}" class="w100p center icon-op">
+                        </div>                    
+                    </div>
+                    <div class="flex">
+                        <div class=" m20 w50">
+                            <img src="{% static 'images/icons/bbq.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class=" m20 w50">
+                            <img src="{% static 'images/icons/microwave-oven.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/fan.png' %}" class="w100p center icon-op">
+                        </div>
+                        <div class="m20 w50">
+                            <img src="{% static 'images/icons/swimming-pool.png' %}" class="w100p center icon-op">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="divisor"></div>
+            <div class="acenter">
+                    <h5 class="orange"><span>AR${{cabana.price}}</span>{{cabana.term}} </h5>
+                <h6 class="dark">hasta {{cabana.top_persons_1st_price}} personas, por persona adicional AR${{cabana.price_extra_persons}} {{cabana.term}}.</h6>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <br>
+    <div class="center">
+        <div class="container">
+            <h1 class="title-center blue">SERVICIOS</h1>
+            <div class="title-divisor"></div>
+        </div>
+        {%for service in services %} 
+        <div class="flex m20 p10 bbottom-blue">
+            <img class="icon-op w80" src="{{service.img.url}}">
+            <div class="w100p m10">
+                <div class="flex jspacebetween"><h5>{{service.name}}</h5><h5>AR${{service.price}}</h5></div>
+                <div class="flex jspacebetween"><p>{{service.description}}</p></div>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+    
+        
+        <div class="container">
+            <h1 class="title-center orange">ACTIVIDADES</h1>
+            <h5 class="title-center">Deportes no incluyen uso del quincho y piscinas, si el acceso a baños y duchas.</h5>
+            <div class="title-divisor"></div>
+        </div>
+        {%for sport in sports %} 
+        <div class="flex m20 p10 bbottom-blue">
+            <img class="icon-op w80" src="{{sport.img.url}}">
+            <div class="w100p m10">
+            <div class="flex lpadding jspacebetween"><h4 >{{sport.name}}</h4><h5 class="aright wfitcontent">AR${{sport.price}} p/hora</h5></div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static '/js/main.js' %}"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+
+
+{% endblock %}
